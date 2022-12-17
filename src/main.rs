@@ -16,7 +16,7 @@ fn main() {
     application.connect_startup(move |app| {
         // The CSS "magic" happens here.
         let provider = CssProvider::new();
-        provider.load_from_data(include_bytes!("style.css"));
+        provider.load_from_data(include_bytes!("/usr/share/crust/crust.css"));
         // We give the CssProvided to the default screen so the CSS rules we added
         // can be applied to our window.
         StyleContext::add_provider_for_display(
@@ -44,7 +44,11 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
                     eprintln!("Couldn't create a file! (Probabilty: Permission Denied)");
                     process::exit(1);
                 });
-                File::create_new(".def").expect("couldn't create a file named: {&arguments[1]}")
+                File::create_new(".def").unwrap_or_else( |_| {
+                    eprintln!("couldn't create a file named: {}", &arguments[1]);
+                    process::exit(0);
+                }
+                )
             })
             .read_to_string(&mut content)
             .unwrap_or(0);
@@ -52,7 +56,7 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
 
     let clone_arguments = Rc::new(arguments.clone());
     // let clone_args = Rc::clone(&clone_arguments);
-    let ui_src = include_str!("crust.ui");
+    let ui_src = include_str!("/usr/share/crust/crust.ui");
     let builder = Builder::new();
     builder
         .add_from_string(ui_src)
@@ -67,7 +71,6 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
     window.show();
     window.connect_destroy(move |_| {
         let content = get_textview_text(&text_view);
-        println!("{:#?}, \n{}", &clone_arguments, &content);
         fs::write(&clone_arguments[1], &content).expect("Couldn't save the file!");
     });
 }
