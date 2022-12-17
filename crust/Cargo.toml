@@ -10,6 +10,6 @@ description = "Lightweight, extremely fast text editor that can be costumized us
 
 [[bin]]
 name = "crust"
-path = "crust/src/main.rs"
+path = "src/main.rs"
 [dependencies]
 gtk = { package = "gtk4", version = "0.5" }
