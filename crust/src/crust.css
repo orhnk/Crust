@@ -1,0 +1,8 @@
+/* This file is a config file which will determine your crust-editor's look */
+/* This file uses real css to configure crust */
+
+textview.view {
+  /* Default gruvbox theme*/
+  color: #ebdbb2;
+  background-color: #282828;
+}
