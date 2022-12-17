@@ -4,7 +4,8 @@ cargo-features = ["test-dummy-unstable"]
 name = "crust"
 version = "0.1.0"
 edition = "2021"
-
+license = "MIT"
+description = "Lightweight, extremely fast text editor that can be costumized using css, fully created with rust, using gtk4-rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
