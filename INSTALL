@@ -129,8 +129,8 @@ MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;tex
 cd ..
 sudo cp crust.desktop /usr/share/applications/
 
-# sudo mkdir ~/.config/crust
-cd crust/src/
-sudo cp crust.ui ~/.config/crust/
-sudo cp crust.css ~/.config/crust/
+sudo mkdir /usr/share/crust
+cd .config/
+sudo cp crust.ui /usr/share/crust/
+sudo cp crust.css /usr/share/crust/
 

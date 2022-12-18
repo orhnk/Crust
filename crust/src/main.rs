@@ -89,6 +89,7 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
     });
     // let icon_theme = IconTheme::get_default().expect("Failed to get default icon theme");
     window.show();
+    // process::exit(1); // -> used to find opening speed!
 }
 
 fn get_textview_text(textview: &gtk::TextView) -> String {

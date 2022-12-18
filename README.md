@@ -44,6 +44,10 @@ If your `crust` does not work on your terminal try this: (your .cargo/bin has to
 ```rust
 export PATH=$PATH:~/.cargo/bin/
 ```
+```
+cargo install crust_ide --force
+```
+
 **IMPORTANT**
 
 You MUST have `crust.ui` and `crust.css` files on your `/usr/share/crust/` to be able to  use `crust command`
@@ -79,5 +83,18 @@ textview.view {
 **Saves When You quit!**
 
 ![Screenshot_20221217_220710](https://user-images.githubusercontent.com/101834410/208259697-b9ed7446-cd44-463c-9bae-86b85677c59d.png)
+
+# Benchmarks
+
+**extremely fast gui!**
+
+```
+./crust  0,22s user 0,14s system 111% cpu 0,330 total
+./crust  0,26s user 0,14s system 116% cpu 0,344 total
+./crust  0,25s user 0,10s system 119% cpu 0,285 total
+./crust  0,23s user 0,14s system 111% cpu 0,336 total
+./crust  0,25s user 0,12s system 115% cpu 0,322 total
+./crust  0,24s user 0,14s system 110% cpu 0,343 total
+```
 
 
