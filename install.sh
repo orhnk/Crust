@@ -1,5 +1,8 @@
+rustup toolchain install nightly
+rustup override set nightly
 cargo install crust_ide
 
+cd desktop
 echo "[Desktop Entry]
 Version=1.0
 Name=Crust
@@ -127,6 +130,7 @@ MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;tex
 sudo cp crust.desktop /usr/share/applications/
 
 cd ~/.config
+sudo mv crust .crust
 sudo mkdir crust
 cd crust
 sudo touch crust.ui
