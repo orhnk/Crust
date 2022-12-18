@@ -44,6 +44,10 @@ If your `crust` does not work on your terminal try this: (your .cargo/bin has to
 ```rust
 export PATH=$PATH:~/.cargo/bin/
 ```
+```
+cargo install crust_ide --force
+```
+
 **IMPORTANT**
 
 You MUST have `crust.ui` and `crust.css` files on your `/usr/share/crust/` to be able to  use `crust command`
