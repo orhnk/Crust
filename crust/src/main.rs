@@ -78,7 +78,7 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
     text_view.buffer().set_text(&content);
 
     let icon_theme = IconTheme::new();
-    // IconTheme::add_resource_path(&icon_theme, "/home/kobruh/github/crust/crust/src/");
+    IconTheme::add_resource_path(&icon_theme, "/home/kobruh/github/crust/crust/src/");
     dbg!(IconTheme::icon_names(&icon_theme));
     // IconTheme::set_theme_name(icons, Some("1f355.png"));
     window.set_icon_name(Some("crust"));
