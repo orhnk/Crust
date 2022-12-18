@@ -1,8 +1,7 @@
 #![feature(file_create_new)] // This is a nightly feature!
 use gtk::gdk::Display;
-use gtk::gio::Icon;
 use gtk::prelude::*;
-use gtk::IconTheme;
+// use gtk::IconTheme;
 use gtk::{
     Application, ApplicationWindow, Builder, CssProvider, StyleContext, TextView,
     STYLE_PROVIDER_PRIORITY_APPLICATION,
@@ -73,9 +72,9 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
     text_view.add_css_class("view");
     text_view.buffer().set_text(&content);
 
-    let icon_theme = IconTheme::new();
-    IconTheme::add_resource_path(&icon_theme, "/home/kobruh/github/crust/crust/src/");
-    dbg!(IconTheme::icon_names(&icon_theme));
+    // let icon_theme = IconTheme::new();
+    // IconTheme::add_resource_path(&icon_theme, "/home/kobruh/github/crust/crust/src/");
+    // dbg!(IconTheme::icon_names(&icon_theme));
     // IconTheme::set_theme_name(icons, Some("1f355.png"));
     window.set_icon_name(Some("crust"));
 
