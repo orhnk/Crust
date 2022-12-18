@@ -62,7 +62,11 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
     let builder = Builder::new();
     builder
         .add_from_string(ui_src)
-        .expect("Couldn't add from string");
+        .unwrap_or_else(|_| {
+            eprintln!("Couldn't add from string");
+            process::exit(1);
+        }
+        );
 
     let window: ApplicationWindow = builder.object("window").expect("Couldn't get window");
     window.set_application(Some(application));
@@ -81,7 +85,12 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
 
     window.connect_destroy(move |_| {
         let content = get_textview_text(&text_view);
-        fs::write(&clone_arguments[1], &content).expect("Couldn't save the file!");
+        if &clone_arguments.len() >= &2_usize {
+        fs::write(&clone_arguments[1], &content).unwrap_or_else(|_| {
+            eprintln!("Couldn't save the file!");
+            process::exit(1);
+        });
+        }
     });
     // let icon_theme = IconTheme::get_default().expect("Failed to get default icon theme");
     window.show();

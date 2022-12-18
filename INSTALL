@@ -126,13 +126,11 @@ Type=Application
 Categories=Utility;TextEditor;Utility;
 MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
 " >> crust.desktop
-
+cd ..
 sudo cp crust.desktop /usr/share/applications/
 
-cd ~/.config
-sudo mv crust .crust
-sudo mkdir crust
-cd crust
-sudo touch crust.ui
-sudo touch crust.css
+# sudo mkdir ~/.config/crust
+cd crust/src/
+sudo cp crust.ui ~/.config/crust/
+sudo cp crust.css ~/.config/crust/
 
