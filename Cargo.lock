@@ -55,7 +55,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "crust"
+name = "crust_ide"
 version = "0.1.0"
 dependencies = [
  "gtk4",

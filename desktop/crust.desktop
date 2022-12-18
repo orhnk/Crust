@@ -1,6 +1,4 @@
-cargo install crust_ide
-
-echo "[Desktop Entry]
+[Desktop Entry]
 Version=1.0
 Name=Crust
 GenericName[ca]=Editor de text
@@ -115,20 +113,10 @@ Keywords[uk]=текст;редактор;
 Keywords[zh_CN]=Text;editor;文本;编辑器;
 Keywords=Text;editor;
 Comment=Extremely fast text editor
-Exec=~/.cargo/bin/crust
-Icon=`pwd`/crust.png
+Exec=/home/kobruh/.cargo/bin/crust
+Icon=/home/kobruh/github/crust/desktop/crust.png
 Terminal=false
 StartupWMClass=crust
 Type=Application
 Categories=Utility;TextEditor;Utility;
 MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
-" >> crust.desktop
-
-sudo cp crust.desktop /usr/share/applications/
-
-cd ~/.config
-sudo mkdir crust
-cd crust
-sudo touch crust.ui
-sudo touch crust.css
-

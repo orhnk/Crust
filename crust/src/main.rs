@@ -1,13 +1,16 @@
 #![feature(file_create_new)] // This is a nightly feature!
-use gtk::prelude::*;
-use std::rc::Rc;
 use gtk::gdk::Display;
+use gtk::IconTheme;
+use gtk::gdk_pixbuf::Pixbuf;
+use gtk::gio::Icon;
+use gtk::prelude::*;
 use gtk::{
     Application, ApplicationWindow, Builder, CssProvider, StyleContext, TextView,
     STYLE_PROVIDER_PRIORITY_APPLICATION,
 };
 use std::env::args;
 use std::process;
+use std::rc::Rc;
 use std::{fs, fs::File, io::Read};
 
 fn main() {
@@ -44,11 +47,10 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
                     eprintln!("Couldn't create a file! (Probabilty: Permission Denied)");
                     process::exit(1);
                 });
-                File::create_new(".def").unwrap_or_else( |_| {
+                File::create_new(".def").unwrap_or_else(|_| {
                     eprintln!("couldn't create a file named: {}", &arguments[1]);
                     process::exit(0);
-                }
-                )
+                })
             })
             .read_to_string(&mut content)
             .unwrap_or(0);
@@ -64,15 +66,25 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
 
     let window: ApplicationWindow = builder.object("window").expect("Couldn't get window");
     window.set_application(Some(application));
+
     // window.set_opacity(0.8); // -> allows transparency but I dont like the look!
+
     let text_view: TextView = builder.object("text_view").expect("Couldn't get text_view");
     text_view.add_css_class("view");
     text_view.buffer().set_text(&content);
-    window.show();
+
+    let icon_theme = IconTheme::new();
+    // IconTheme::add_resource_path(&icon_theme, "/home/kobruh/github/crust/crust/src/");
+    dbg!(IconTheme::icon_names(&icon_theme));
+    // IconTheme::set_theme_name(icons, Some("1f355.png"));
+    window.set_icon_name(Some("crust"));
+
     window.connect_destroy(move |_| {
         let content = get_textview_text(&text_view);
         fs::write(&clone_arguments[1], &content).expect("Couldn't save the file!");
     });
+    // let icon_theme = IconTheme::get_default().expect("Failed to get default icon theme");
+    window.show();
 }
 
 fn get_textview_text(textview: &gtk::TextView) -> String {
