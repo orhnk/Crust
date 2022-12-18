@@ -1,9 +1,8 @@
 #![feature(file_create_new)] // This is a nightly feature!
 use gtk::gdk::Display;
-use gtk::IconTheme;
-use gtk::gdk_pixbuf::Pixbuf;
 use gtk::gio::Icon;
 use gtk::prelude::*;
+use gtk::IconTheme;
 use gtk::{
     Application, ApplicationWindow, Builder, CssProvider, StyleContext, TextView,
     STYLE_PROVIDER_PRIORITY_APPLICATION,
@@ -60,13 +59,10 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
     // let clone_args = Rc::clone(&clone_arguments);
     let ui_src = include_str!("/usr/share/crust/crust.ui");
     let builder = Builder::new();
-    builder
-        .add_from_string(ui_src)
-        .unwrap_or_else(|_| {
-            eprintln!("Couldn't add from string");
-            process::exit(1);
-        }
-        );
+    builder.add_from_string(ui_src).unwrap_or_else(|_| {
+        eprintln!("Couldn't add from string");
+        process::exit(1);
+    });
 
     let window: ApplicationWindow = builder.object("window").expect("Couldn't get window");
     window.set_application(Some(application));
@@ -86,10 +82,10 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
     window.connect_destroy(move |_| {
         let content = get_textview_text(&text_view);
         if &clone_arguments.len() >= &2_usize {
-        fs::write(&clone_arguments[1], &content).unwrap_or_else(|_| {
-            eprintln!("Couldn't save the file!");
-            process::exit(1);
-        });
+            fs::write(&clone_arguments[1], &content).unwrap_or_else(|_| {
+                eprintln!("Couldn't save the file!");
+                process::exit(1);
+            });
         }
     });
     // let icon_theme = IconTheme::get_default().expect("Failed to get default icon theme");
