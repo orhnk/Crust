@@ -2,7 +2,7 @@ cargo-features = ["test-dummy-unstable"]
 
 [package]
 name = "crust_ide"
-version = "0.1.0"
+version = "0.1.5"
 edition = "2021"
 license = "MIT"
 description = "Lightweight, extremely fast text editor that can be costumized using css, fully created with rust, using gtk4-rs"
