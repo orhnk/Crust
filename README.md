@@ -17,7 +17,7 @@ Crust is lightweight incredibly fast text editor fully created with rust.
   
   ∫ Simple! -> You could use simple combinations like: shift+ctrl+arrow keys to highlight a text by words
   
-  ∫ Easy to configure -> Uses default gtk4 css cınfiguration which makes it super easy!
+  ∫ Easy to configure -> Uses default gtk4 css configuration which makes it super easy!
   
   ∫ Smooth animations -> Crust uses default gtk4 animations on a Text instance, which is pretty smooth and good-looking!
   
