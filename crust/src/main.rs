@@ -1,3 +1,5 @@
+#!/usr/bin/env run-cargo-script
+
 #![feature(file_create_new)] // This is a nightly feature!
 use gtk::gdk::Display;
 use gtk::prelude::*;
@@ -11,13 +13,34 @@ use std::process;
 use std::rc::Rc;
 use std::{fs, fs::File, io::Read};
 
+static home: String = get_global();
+
+// creates a variable which has no type! noice
+fn get_global<T>() -> &'static T {
+    fn init() -> T { std::env::var("HOME").unwrap_or_else(|_| {
+    eprintln!("Couldn't find $HOME");
+    process::exit(1);
+}) }
+    
+    use std::mem::MaybeUninit;
+    
+    static mut GLOBAL: MaybeUninit<T> = MaybeUninit::uninit();
+    static mut ONCE: Once = Once::new();
+    
+    unsafe {
+        ONCE.call_once(|| GLOBAL = MaybeUninit(init()));
+        
+        &*GLOBAL.as_ptr()
+    }
+}
+
 fn main() {
     let arguments: Vec<String> = args().collect();
     let application = Application::new(Some("com.github.kobruhh.crust"), Default::default());
     application.connect_startup(move |app| {
         // The CSS "magic" happens here.
         let provider = CssProvider::new();
-        provider.load_from_data(include_bytes!("/usr/share/crust/crust.css"));
+        provider.load_from_data(std::fs::read_to_string("/home/kobruh/.config/crust/crust.css").expect("Couldn't find crust.css").as_bytes());
         // We give the CssProvided to the default screen so the CSS rules we added
         // can be applied to our window.
         StyleContext::add_provider_for_display(
@@ -56,7 +79,7 @@ pub fn build_ui(application: &Application, arguments: &Vec<String>) {
 
     let clone_arguments = Rc::new(arguments.clone());
     // let clone_args = Rc::clone(&clone_arguments);
-    let ui_src = include_str!("/usr/share/crust/crust.ui");
+    let ui_src = &std::fs::read_to_string("/home/kobruh/.config/crust/crust.ui").expect("Couldn't find crust.ui");
     let builder = Builder::new();
     builder.add_from_string(ui_src).unwrap_or_else(|_| {
         eprintln!("Couldn't add from string");
