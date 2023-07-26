@@ -6,6 +6,7 @@ version = "0.1.7"
 edition = "2021"
 license = "MIT"
 description = "Lightweight, extremely fast text editor that can be costumized using css, fully created with rust, using gtk4-rs"
+repository = "https://github.com/UTFeight/Crust/"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [[bin]]
